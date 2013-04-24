@@ -1,57 +1,76 @@
-
 // RequireJS configuration options
-
 requirejs.config({
-	shim : {
-		'backbone' : {
-			deps : ['jquery', 'underscore'],
-			exports : 'Backbone'
+	shim: {
+		'backbone': {
+			deps: ['jquery', 'underscore'],
+			exports: 'Backbone'
 		},
-		'underscore' : {
-			exports : '_'
+
+		'underscore': {
+			exports: '_'
 		},
-		'hogan' : {
-			exports : 'Hogan'
+
+		'hogan': {
+			exports: 'Hogan'
 		},
-		'tinymce' : {
-			exports : 'tinymce'
+
+		'tinymce': {
+			exports: 'tinymce'
 		},
-		'bootstrap' : {
-			deps : ['jquery']
-		}
+
+		'jquery.tinymce': {
+			deps: ['jquery'],
+			exports: 'jQuery.fn.tinymce'
+		},
+
+		'bootstrap': ['jquery']
 	},
 
-	paths : {
-		backbone : 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
-		underscore : 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
-		hogan : 'http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan',
-		tinymce : 'tinymce/jscrupts/tiny_mce/tiny_mce',
-		bootstrap : 'bootstrap.min',
-		app : '../app'
+	paths: {
+		backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
+		underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
+		hogan: 'http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan',
+		tinymce: 'tinymce/jscripts/tiny_mce/tiny_mce',
+		'jquery.tinymce' : 'tinymce/jscripts/tiny_mce/jquery.tinymce',
+		bootstrap: 'bootstrap.min',
+		app: '../app'
 	},
 
-	baseUrl : 'js/lib'
+	baseUrl: 'js/lib'
 });
 
 // Here is where the magic begins
-require(['jquery', 'backbone', 'hogan', 'app/rteMonitor'], function($, Backbone, hogan, monitor){
+require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'jquery.tinymce', ], function($, Backbone, hogan, monitor, tinymce) {
 	var Router = Backbone.Router.extend({
-			routes : {
-				'popup' : 'popup',
-				'*default' : 'default'
-			}
-		}),
+		routes: {
+			'popup': 'popup',
+			'*default': 'default'
+		}
+	}),
 		router = new Router;
 
-	router.on('route:popup', function(){
-		//alert('Pop-up');
+	router.on('route:popup', function() {
+		alert('Pop-up');
 
 	});
-	router.on('route:default', function(){
-		//var template = hogan.compile( $('#main').html() );
-		//$('body').append(template.render());
+	router.on('route:default', function() {
 
-	})
-	Backbone.history.start();
+	});
+
+	Backbone.history.start({
+		pushState: true
+	});
+/*
+	tinymce.init({
+	       mode : "none",
+	       theme : "simple"
+	});
+
+	tinymce.execCommand('addControls', false, 'inst1');
+*/
+	$('#inst1').tinymce({
+		mode: "none",
+		theme: "simple"
+	});
 
 });
