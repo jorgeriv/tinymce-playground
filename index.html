@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>TinyMCE - jquery, require, underscore, backbone</title>
+		<link type="text/css" rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+	<!-- Templates -->
+		<script id="main" type="text/hogan-template">
+			<h1>TinyMCE</h1>
+			<p>This is a TinyMCE playground</p>
+			<hr />
+			<h3>Instance 1</h3>
+			<p>A TinyMCE instance initialized on page load</p>
+			<textarea id='inst1' class="rte"></textarea>
+			<hr />
+			<h3>Instance 2</h3>
+			<p>A TinyMCE instance initialized on demand</p>
+			<textarea id='inst2' class="rte"></textarea>
+			<p>
+				<a data-inst="2" data-action="add" href="#">Initialize RTE</a> | 
+				<a data-inst="2" data-action="remove" href="#">Unload RTE</a>
+			</p>
+			<hr />
+			<h3>Instance 3</h3>
+			<p>A TinyMCE instance added dynamically to the DOM</p>
+			<a data-inst="3" href="#popup">Launch</a>
+		</script>
+		<script id='activeEditor' type="text/hogan-template">
+			<div class='info'>
+				Active editor id : <span id='editorID'>Not monitoring</span>
+				<p>
+				<a data-action="start" href="#">Start</a> | <a data-action="stop" href="#">stop</a>
+				</p>
+			</div>
+		</script>
+		<script id='popup' type="text/hogan-template">
+			<div class='popup'>
+				<textarea id='inst3' class="rte"></textarea>
+			</div>
+		</script>
+		<!-- Scripts -->
+		<script data-main="js/main" src="http://cdnjs.cloudflare.com/ajax/libs/require-jquery/0.25.0/require-jquery.min.js"></script>
+
+	</body>
+</html>
