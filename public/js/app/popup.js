@@ -1,38 +1,46 @@
-define(['backbone', 'hogan'], function(Backbone, Hogan){
-	var popup = new(Backbone.View.extend({
+define(['backbone', 'hogan', 'text!./templates/popup.hjs'], function (Backbone, Hogan, template) {
 
-		id : "myModal",
+	var PopUp = Backbone.View.extend({
+		id: "myModal",
 
-		className : "modal hide fade",
+		className: "modal hide fade",
 
-		tabindex : "-1",
+		tabindex: "-1",
 
-		role : "dialog",
+		role: "dialog",
 
-		'aria-labelledby' : "myModalLabel",
+		'aria-labelledby': "myModalLabel",
 
-		'aria-hidden' : "true",
+		'aria-hidden': "true",
 
-		template: Hogan.compile($('#modal').html()),
+		template: null,
 
-		events : {
+		events: {
 
 		},
 
-		render : function(data){
+		initialize: function() {
+			this.template = Hogan.compile(template);
+		},
+
+		render: function (data) {
 			this.$el.html(this.template.render(data));
 			return this;
 		}
+	});
 
-	}));
+	var popup = new PopUp();
+
+	$('body').append(popup.render().el);
 
 	return {
-		show : function(content){
-			var templateData = {
-				title : 'RTE instance added dynamically to the DOM',
-				body :  content || ''
+		show: function (title, content, callbackShow, callbackHide) {
+			var data = {
+				title: title || '',
+				body: content || ''
 			};
-			$('body').append(popup.render(templateData).el);
+
+			popup.render(data).$el.one('shown', callbackShow).one('hidden', callbackHide).modal('show');
 		}
-	}
+	};
 });
