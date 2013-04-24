@@ -52,7 +52,7 @@
       </div>
 
       <hr>
-
+      <button id='modalLauncher' class='hide' type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
       <div class="footer">
         <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</p>
       </div>
@@ -76,6 +76,20 @@
 		<h4>Instance 3</h4>
 		<p>A TinyMCE instance added dynamically to the DOM</p>
 		<a class="inst3" href="#popup">Launch</a>
+    </script>
+
+    <script id="modal" type="text/x-hogan-template">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">{{title}}</h3>
+		</div>
+		<div class="modal-body">
+			<p>{{body}}</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-primary">Save changes</button>
+		</div>
     </script>
     <!-- Script -->
     <script data-main="js/main" src="//cdnjs.cloudflare.com/ajax/libs/require-jquery/0.25.0/require-jquery.min.js"></script>

@@ -40,6 +40,7 @@ body {
 	top: 120px;
 	right: 0px;
 	opacity: 0.9;
+	z-index: 10000;
 }
 
 
