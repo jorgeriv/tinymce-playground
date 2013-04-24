@@ -1,46 +1,79 @@
-<!Doctype html>
-<html>
-	<head>
-		<title>TinyMCE - jquery, require, underscore, backbone</title>
-		<link type="text/css" rel="stylesheet" href="css/style.css" />
-	</head>
-	<body>
-	<!-- Templates -->
-		<script id="main" type="text/hogan-template">
-			<h1>{{title}}</h1>
-			<p>This is a TinyMCE playground</p>
-			<hr />
-			<h3>Instance 1</h3>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>TinyMCE - jquery, require, underscore, backbone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TinyMCE playground">
+    <meta name="author" content="Jorge Rivera - twitter: @bytx - joregiv [at] gmail">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="muted">Enjoy :)</h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>{{title}}</h1>
+        <p class="lead">This is just a TinyMCE playground to test different usecases for TinyMCE</p>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid">
+        <div class="span6">
+			<h4>Instance 1</h4>
 			<p>A TinyMCE instance initialized on page load</p>
-			<textarea id='inst1' class="rte"></textarea>
-			<hr />
-			<h3>Instance 2</h3>
+			<textarea id='inst1' class="rte">
+			</textarea>
+
+			<h4>Instance 2</h4>
 			<p>A TinyMCE instance initialized on demand</p>
-			<textarea id='inst2' class="rte"></textarea>
+			<textarea id='inst2' class="rte">
+			</textarea>
 			<p>
-				<a data-inst="2" data-action="add" href="#">Initialize RTE</a> | 
+				<a data-inst="2" data-action="add" href="#">Initialize RTE</a>
+				|
 				<a data-inst="2" data-action="remove" href="#">Unload RTE</a>
 			</p>
-			<hr />
-			<h3>Instance 3</h3>
+			<h4>Instance 3</h4>
 			<p>A TinyMCE instance added dynamically to the DOM</p>
 			<a data-inst="3" href="#popup">Launch</a>
-		</script>
-		<script id='activeEditor' type="text/hogan-template">
-			<div class='info'>
-				Active editor id : <span id='editorID'>Not monitoring</span>
-				<p>
-				<a data-action="start" href="#">Start</a> | <a data-action="stop" href="#">stop</a>
-				</p>
-			</div>
-		</script>
-		<script id='popup' type="text/hogan-template">
-			<div class='popup'>
-				<textarea id='inst3' class="rte"></textarea>
-			</div>
-		</script>
-		<!-- Scripts -->
-		<script data-main="js/main" src="http://cdnjs.cloudflare.com/ajax/libs/require-jquery/0.25.0/require-jquery.min.js"></script>
+        </div>
 
-	</body>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Script -->
+    <script type="text/javascript" src=""></script>
+
+  </body>
 </html>

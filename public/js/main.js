@@ -1,3 +1,6 @@
+
+// RequireJS configuration options
+
 requirejs.config({
 	shim : {
 		'backbone' : {
@@ -12,6 +15,9 @@ requirejs.config({
 		},
 		'tinymce' : {
 			exports : 'tinymce'
+		},
+		'bootstrap' : {
+			deps : ['jquery']
 		}
 	},
 
@@ -20,12 +26,14 @@ requirejs.config({
 		underscore : 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
 		hogan : 'http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan',
 		tinymce : 'tinymce/jscrupts/tiny_mce/tiny_mce',
+		bootstrap : 'bootstrap.min',
 		app : '../app'
 	},
 
 	baseUrl : 'js/lib'
 });
 
+// Here is where the magic begins
 require(['jquery', 'backbone', 'hogan', 'app/rteMonitor'], function($, Backbone, hogan, monitor){
 	var Router = Backbone.Router.extend({
 			routes : {
@@ -40,8 +48,8 @@ require(['jquery', 'backbone', 'hogan', 'app/rteMonitor'], function($, Backbone,
 
 	});
 	router.on('route:default', function(){
-		var template = hogan.compile( $('#main').html() );
-		$('body').append(template.render());
+		//var template = hogan.compile( $('#main').html() );
+		//$('body').append(template.render());
 
 	})
 	Backbone.history.start();
