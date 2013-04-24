@@ -1,13 +1,25 @@
-define('tinymce', function(tinymce){
-	var id;
+define(['tinymce'], function(tinymce){
+	var id = null;
 	return {
 		start : function(){
-			$('.info p').html(tinymce.activeEditor.id);
-			id = setTimeOut(arguments.calee, 100);
+			if(tinymce.activeEditor){
+				$('#info #status').html(tinymce.activeEditor.id);
+			} else {
+				$('#info #status').html('No active editor');
+			}
+			id = setTimeout(arguments.callee, 100);
 		},
 		stop : function(){
-			$('.info p').html('Not monitoring');
-			clearTimeOut(id);
+			$('#info #status').html('Not monitoring');
+			clearTimeout(id);
+			id=null;
+		},
+		toggle : function(){
+			if(id){
+				this.stop();
+			} else {
+				this.start();
+			}
 		}
 	}
 });

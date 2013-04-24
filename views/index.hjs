@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>TinyMCE - jquery, require, underscore, backbone</title>
+    <title>{{ptitle}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TinyMCE playground">
     <meta name="author" content="Jorge Rivera - twitter: @bytx - joregiv [at] gmail">
@@ -35,32 +35,19 @@
       <hr>
 
       <div class="jumbotron">
-        <h1>{{title}}</h1>
+        <h1>{{dtitle}}</h1>
         <p class="lead">This is just a TinyMCE playground to test different usecases for TinyMCE</p>
       </div>
 
       <hr>
-
-      <div class="row-fluid">
-        <div class="span6">
-			<h4>Instance 1</h4>
-			<p>A TinyMCE instance initialized on page load</p>
-			<textarea id='inst1' class="rte">
-			</textarea>
-
-			<h4>Instance 2</h4>
-			<p>A TinyMCE instance initialized on demand</p>
-			<textarea id='inst2' class="rte">
-			</textarea>
-			<p>
-				<a data-inst="2" data-action="add" href="#">Initialize RTE</a>
-				|
-				<a data-inst="2" data-action="remove" href="#">Unload RTE</a>
-			</p>
-			<h4>Instance 3</h4>
-			<p>A TinyMCE instance added dynamically to the DOM</p>
-			<a data-inst="3" href="#popup">Launch</a>
-        </div>
+      <div id="info">
+     	<span>Active RTE id:</span>
+     	<p id='status'>Not monitoring</p>
+	    <div class="btn-group">
+	    	<button class="btn btn-primary">Start/Stop</button>
+	    </div>
+      </div>
+      <div id="content" class="row">
 
       </div>
 
@@ -70,8 +57,26 @@
         <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</p>
       </div>
 
-    </div> <!-- /container -->
-
+    </div>
+    <!-- Templates -->
+    <script id="main" type="text/x-hogan-template">
+		<h4>Instance 1</h4>
+		<p>A TinyMCE instance initialized on page load</p>
+		<textarea id='inst1' class="rte">
+		</textarea>
+		<h4>Instance 2</h4>
+		<p>A TinyMCE instance initialized on demand</p>
+		<textarea id='inst2' class="rte">
+		</textarea>
+		<p>
+			<a class="inst2" data-action="add" href="#">Load RTE</a>
+			|
+			<a class="inst2" data-action="remove" href="#">Unload RTE</a>
+		</p>
+		<h4>Instance 3</h4>
+		<p>A TinyMCE instance added dynamically to the DOM</p>
+		<a class="inst3" href="#popup">Launch</a>
+    </script>
     <!-- Script -->
     <script data-main="js/main" src="//cdnjs.cloudflare.com/ajax/libs/require-jquery/0.25.0/require-jquery.min.js"></script>
 

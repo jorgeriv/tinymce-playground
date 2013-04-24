@@ -40,37 +40,68 @@ requirejs.config({
 });
 
 // Here is where the magic begins
-require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'jquery.tinymce', ], function($, Backbone, hogan, monitor, tinymce) {
+require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Module/app', 'jquery.tinymce'], 
+function($, Backbone, Hogan, monitor, tinymce, rte) {
 	var Router = Backbone.Router.extend({
 		routes: {
-			'popup': 'popup',
 			'*default': 'default'
 		}
 	}),
 		router = new Router;
 
-	router.on('route:popup', function() {
-		alert('Pop-up');
-
-	});
 	router.on('route:default', function() {
+		var mainView = new (Backbone.View.extend({
 
+			className : 'span6',
+			template : Hogan.compile( $('#main').html() ),
+			events : {
+				"click .inst2" : "toggleInst2",
+				"click .inst3" : "popup"
+			},
+
+			initialize : function(){
+				rte.addEditor('inst1');
+			},
+
+			render : function(){
+				this.$el.html(this.template.render({}));
+				return this;
+			},
+
+			toggleInst2 : function(e){
+				e.preventDefault();
+				if($(e.currentTarget).data().action === 'add'){
+					rte.addEditor('inst2');
+				} else {
+					rte.removeEditor('inst2');
+				}
+			}, 
+
+			popup : function(e){
+
+				e.preventDefault();
+
+				require(['app/popup', 'app/popup-content-view'], function(popup, Content){
+					var content = new Content;
+					popup.show(content.render().el);
+				});
+			}
+
+		}));
+
+		$('#content').html( mainView.render().el );
 	});
 
 	Backbone.history.start({
 		pushState: true
 	});
-/*
-	tinymce.init({
-	       mode : "none",
-	       theme : "simple"
+
+	$('#info button').click(function(e){
+		var $target = $(this);
+			$('#status').toggleClass('active');
+			monitor.toggle();
 	});
 
-	tinymce.execCommand('addControls', false, 'inst1');
-*/
-	$('#inst1').tinymce({
-		mode: "none",
-		theme: "simple"
-	});
+
 
 });

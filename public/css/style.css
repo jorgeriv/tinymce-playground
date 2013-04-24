@@ -29,4 +29,28 @@ body {
 	font-size: 21px;
 	padding: 14px 24px;
 }
+#info{
+	display: block;
+	width: 150px;
+	padding: 10px 15px;
+	background-color: #444;
+	color: #efefef;
+	border-radius: 4px 0  0 4px;
+	position: fixed;
+	top: 120px;
+	right: 0px;
+	opacity: 0.9;
+}
 
+
+#info span{
+	font-weight: bold;
+}
+#info p{
+	color:red;
+	text-shadow: 0 0 10px #fff;
+}
+#info .active{
+	color:#7FFF00;
+	text-shadow:none;
+}

@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'TinyMCE Playground' });
+  res.render('index', { ptitle: 'TinyMCE - jquery, require, underscore, backbone', dtitle : 'TinyMCE Playground' });
 };
