@@ -98,7 +98,7 @@ require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Mo
 
 			popup: function(e) {
 				e.preventDefault();
-				popup.show('RTE dynamically added to DOM', '<textarea id="inst3" class="rte"></textarea>', function() {
+				popup.window('RTE dynamically added to DOM', '<textarea id="inst3" class="rte"></textarea>', function() {
 					rte.addEditor('inst3', 'popup');
 				}, function() {
 					rte.removeEditor('inst3');

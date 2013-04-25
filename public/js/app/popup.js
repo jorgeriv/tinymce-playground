@@ -1,6 +1,6 @@
 define(['backbone', 'hogan', 'text!./templates/popup.hjs'], function (Backbone, Hogan, template) {
 
-	var PopUp = Backbone.View.extend({
+	var Modal = Backbone.View.extend({
 		id: "myModal",
 
 		className: "modal hide fade",
@@ -29,18 +29,30 @@ define(['backbone', 'hogan', 'text!./templates/popup.hjs'], function (Backbone, 
 		}
 	});
 
-	var popup = new PopUp();
+	var mWindow = new Modal({});
 
-	$('body').append(popup.render().el);
+	var alert = new Modal({});
+
+	var prompt = new Modal({});
+
+	$('body').append(mWindow.render().el);
 
 	return {
-		show: function (title, content, callbackShow, callbackHide) {
+		alert : function(){
+
+		},
+
+		prompt : function(title, text){
+
+		},
+
+		window: function (title, content, onOpen, onClose) {
 			var data = {
 				title: title || '',
 				body: content || ''
 			};
 
-			popup.render(data).$el.one('shown', callbackShow).one('hidden', callbackHide).modal('show');
+			mWindow.render(data).$el.one('shown', onOpen).one('hidden', onClose).modal('show');
 		}
 	};
 });

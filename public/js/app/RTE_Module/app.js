@@ -1,7 +1,7 @@
 define(['tinymce', 'jquery', 'underscore', 'jquery.tinymce'], function(tinymce, $, _) {
-	var gSettings = {}, // global settings
+	var gSettings = {},
+		// global settings
 		editors = []; // active editors ID's array
-
 	gSettings.defaults = { // default settings
 		mode: "none",
 		theme: "simple"
@@ -25,15 +25,15 @@ define(['tinymce', 'jquery', 'underscore', 'jquery.tinymce'], function(tinymce, 
 
 		addEditor: function(target, settings) {
 			if (typeof settings === 'string' && gSettings[settings]) {
-					settings = gSettings[settings];
+				settings = gSettings[settings];
 			} else if (typeof settings !== 'object') {
 				settings = gSettings.defaults;
 			}
 
 			tinymce.settings = settings;
 
-			if(typeof target === 'string'){
-				if(_.contains(editors, target)){
+			if (typeof target === 'string') {
+				if (_.contains(editors, target)) {
 					this.removeEditor(target);
 				}
 				tinymce.execCommand('mceAddControl', false, target); // if editor doesn't exist, add
@@ -44,22 +44,12 @@ define(['tinymce', 'jquery', 'underscore', 'jquery.tinymce'], function(tinymce, 
 		removeEditor: function(target) {
 
 			//TODO: verifty if the target is already an editor, if not, skip
-			if (typeof target === 'string') {
-				editors = _.reject(editors, function(item){
+			if (typeof target === 'string'&&  _.indexOf(editors, target ) >= 0 ) {
+				editors = _.reject(editors, function(item) {
 					return target === item;
 				});
 				tinymce.execCommand('mceFocus', false, target);
 				tinymce.execCommand('mceRemoveControl', false, target);
-			}
-		},
-
-		removeActive: function() {
-
-			if (tinymce.activeEditor) {
-				editors = _.reject(editors, function(item){
-					return tinymce.activeEditor.id === item;
-				});
-				tinymce.activeEditor.remove();
 			}
 		},
 
