@@ -27,6 +27,7 @@ requirejs.config({
 	},
 
 	paths: {
+		text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text',
 		backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
 		underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
 		hogan: 'http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan',
@@ -40,7 +41,7 @@ requirejs.config({
 });
 
 // Here is where the magic begins
-require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Module/app', 'jquery.tinymce', 'bootstrap'], function($, Backbone, Hogan, monitor, tinymce, rte) {
+require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Module/app', 'app/popup', 'jquery.tinymce', 'bootstrap', 'text'], function($, Backbone, Hogan, monitor, tinymce, rte, popup) {
 	var Router = Backbone.Router.extend({
 		routes: {
 			'*default': 'default'
@@ -49,7 +50,7 @@ require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Mo
 		router = new Router;
 
 	router.on('route:default', function() {
-		var mainView = new(Backbone.View.extend({
+		var mainView = new (Backbone.View.extend({
 
 			className: 'span6',
 			template: Hogan.compile($('#main').html()),
@@ -59,7 +60,6 @@ require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Mo
 			},
 
 			initialize: function() {
-				rte.addEditor('inst1');
 			},
 
 			render: function() {
@@ -97,19 +97,18 @@ require(['jquery', 'backbone', 'hogan', 'app/rteMonitor', 'tinymce', 'app/RTE_Mo
 			},
 
 			popup: function(e) {
-
 				e.preventDefault();
-
-				require(['app/popup', 'app/popup-content-view'], function(popup, content) {
-					popup.show(content.render().el);
+				popup.show('RTE dynamically added to DOM', '<textarea id="inst3" class="rte"></textarea>', function() {
 					rte.addEditor('inst3', 'popup');
-					$('#modalLauncher').trigger('click');
+				}, function() {
+					rte.removeEditor('inst3');
 				});
 			}
 
 		}));
 
 		$('#content').html(mainView.render().el);
+		rte.addEditor('inst1');
 	});
 
 	Backbone.history.start({
